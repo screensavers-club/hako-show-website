@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "google-analytics": {
+      "command": "pipx",
+      "args": ["run", "analytics-mcp"],
+      "env": {
+        "GOOGLE_APPLICATION_CREDENTIALS": "/Users/siah/Dev/google-analytics-mcp/gcp-service-account.json",
+        "GOOGLE_PROJECT_ID": "claude-mcp-485402"
+      }
+    }
+  }
+}
