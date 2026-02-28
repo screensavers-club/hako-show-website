@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+.menu-section {
+  @apply space-y-6;
+}
+
+.menu-heading {
+  @apply text-xs tracking-[0.3em] uppercase text-center;
+}
+
+.menu-dish {
+  @apply space-y-1 text-center;
+}
+
+.menu-title {
+  @apply text-lg font-medium;
+}
+
+.menu-subtitle {
+  @apply text-sm;
+}
+
+.menu-description {
+  @apply text-xs leading-relaxed;
+}
