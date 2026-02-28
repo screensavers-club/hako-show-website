@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+@layer base {
+  *, ::after, ::before, ::backdrop, ::file-selector-button {
+    color-scheme: light only;
+  }
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;

@@ -41,6 +41,7 @@ export default function DrinkPicker({ items }: { items: Item[] }) {
         <div className="flex justify-center gap-2">
           {items.map((_, i) => (
             <button
+              type="button"
               key={i}
               onClick={() => setActive(i)}
               className={`w-7 h-7 rounded-full text-xs transition-colors ${
