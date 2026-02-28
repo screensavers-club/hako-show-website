@@ -106,8 +106,7 @@ export default function RSVPForm() {
       <div className="w-full max-w-md p-8 text-center">
         <h2 className="text-2xl font-bold mb-2">ご予約ありがとうございます</h2>
         <p className="text-gray-600 mb-6">
-          {date} {time} にお待ちしております。確認メールを {email}{" "}
-          にお送りしました。
+          ご質問等ございましたら、kuku81com@gmail.com までお問い合わせください。
         </p>
         <button
           onClick={() => {
