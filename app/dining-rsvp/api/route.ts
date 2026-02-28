@@ -5,12 +5,28 @@ const VALID_TIMES = ["18:00", "19:30"];
 
 export async function POST(request: Request) {
   const body = await request.json();
-  const { name, email, phone, partySize, date, time } = body;
+  const { name, email, phone, partySize, date, time, drinkPairing, afterDinnerDrink } = body;
 
   // Validate required fields
   if (!name || !email || !phone || !partySize || !date || !time) {
     return NextResponse.json(
       { error: "All fields are required" },
+      { status: 400 }
+    );
+  }
+
+  const VALID_DRINK_PAIRINGS = ["herby-baby", "bitter-sour", "fresh-paloma", ""];
+  if (drinkPairing && !VALID_DRINK_PAIRINGS.includes(drinkPairing)) {
+    return NextResponse.json(
+      { error: "Invalid drink pairing selection" },
+      { status: 400 }
+    );
+  }
+
+  const VALID_AFTER_DINNER_DRINKS = ["orange-brew", "dark-roast", ""];
+  if (afterDinnerDrink && !VALID_AFTER_DINNER_DRINKS.includes(afterDinnerDrink)) {
+    return NextResponse.json(
+      { error: "Invalid after dinner drink selection" },
       { status: 400 }
     );
   }
@@ -45,7 +61,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid time" }, { status: 400 });
   }
 
-  console.log("New reservation:", { name, email, phone, partySize: size, date, time });
+  console.log("New reservation:", { name, email, phone, partySize: size, date, time, drinkPairing, afterDinnerDrink });
 
   return NextResponse.json({ success: true });
 }
