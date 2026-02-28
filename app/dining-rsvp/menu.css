@@ -1,29 +1,37 @@
 @import "tailwindcss";
 
 .menu-section {
-  @apply space-y-6;
+  @apply space-y-16;
 }
 
 .menu-heading {
-  @apply text-base tracking-[0.3em] uppercase text-center;
+  @apply text-xl tracking-[0.3em] uppercase text-center text-gray-400;
+}
+
+hr {
+  @apply border-gray-200;
 }
 
 .menu-heading-note {
-  @apply text-xs tracking-[0.3em] text-center;
+  @apply text-base tracking-[0.3em] text-center text-gray-400;
+}
+
+.menu-heading + .menu-heading-note {
+  @apply -mt-14;
 }
 
 .menu-dish {
-  @apply space-y-1 text-center;
+  @apply space-y-2 text-center text-lg px-8;
 }
 
 .menu-title {
-  @apply text-lg font-medium;
+  @apply text-2xl font-medium;
 }
 
 .menu-subtitle {
-  @apply text-sm;
+  @apply text-lg;
 }
 
 .menu-description {
-  @apply text-xs leading-relaxed;
+  @apply text-lg mt-4 leading-relaxed text-balance;
 }

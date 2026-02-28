@@ -4,7 +4,7 @@ import DrinkPicker from "./DrinkPicker";
 export default function DiningRSVP() {
   return (
     <div className="min-h-screen w-screen bg-white flex items-center justify-center px-4 py-16">
-      <article className="max-w-md w-full space-y-10">
+      <article className="max-w-lg w-full space-y-10">
         <section className="menu-section">
           <h2 className="menu-heading">前菜</h2>
           <div className="menu-dish">
@@ -27,15 +27,17 @@ export default function DiningRSVP() {
 
         <hr />
 
-        <section className="menu-dish">
+        <section className="menu-section">
           <h2 className="menu-heading">お口直し</h2>
-          <h3 className="menu-title">
-            Salad Slush{" "}
-            <span className="text-xs font-normal ml-1">[ノンアル]</span>
-          </h3>
-          <p className="menu-description">
-            ミニトマト、酸梅、オリーブオイル、かき氷
-          </p>
+          <DrinkPicker
+            items={[
+              {
+                title: "Salad Slush",
+                description: "ミニトマト、酸梅、オリーブオイル、かき氷",
+                badge: "ノンアル",
+              },
+            ]}
+          />
         </section>
 
         <hr />
@@ -56,7 +58,7 @@ export default function DiningRSVP() {
             </h3>
             <p className="menu-subtitle">ニョニャ風野菜の炊き合わせ</p>
             <p className="menu-description">
-              白菜、湯葉、木耳、緑豆春雨の味噌煮＊。
+              白菜、湯葉、木耳、緑豆春雨の味噌煮。
             </p>
           </div>
           <div className="menu-dish">
@@ -85,16 +87,20 @@ export default function DiningRSVP() {
               {
                 title: "Herby Baby",
                 description: "レモングラス、生姜、ソーダ",
+                badge: "ノンアル",
               },
+
               {
                 title: "Bitter Sour",
                 description:
                   "ゴーヤ、酸梅、氷砂糖、ジン、エッグホワイトフォーム",
+                badge: "アルコル",
               },
               {
                 title: "Fresh Paloma",
                 description:
-                  "純米大吟醸日本酒、みかん、ソーダ、アガベシロップ、ライム",
+                  "純米大吟醸酒、みかん、ソーダ、アガベシロップ、ライム",
+                badge: "アルコル",
               },
             ]}
           />
@@ -157,8 +163,13 @@ export default function DiningRSVP() {
                 title: "Orange Brew",
                 description:
                   "ダックシット・ウーロン（鴨屎香烏龍）コールドブリュー、タンジェリンの皮エキス",
+                badge: "ノンアル",
               },
-              { title: "Dark Roast Coffee", description: "深煎りコーヒー" },
+              {
+                title: "Dark Roast Coffee",
+                description: "深煎りコーヒー",
+                badge: "ノンアル",
+              },
             ]}
           />
         </section>
