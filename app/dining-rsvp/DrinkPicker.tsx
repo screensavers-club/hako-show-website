@@ -13,16 +13,28 @@ export default function DrinkPicker({ items }: { items: Item[] }) {
 
   return (
     <div className="space-y-3">
-      <div className="menu-dish">
-        <h3 className="menu-title">
-          {items[active].title}
-          {items[active].badge && (
-            <span className="ml-2 inline-block align-middle text-[10px] font-medium px-1.5 py-0.5 border border-current opacity-60">
-              {items[active].badge}
-            </span>
-          )}
-        </h3>
-        <p className="menu-description">{items[active].description}</p>
+      <div className="grid [&>*]:col-start-1 [&>*]:row-start-1">
+        {items.map((item, i) => (
+          <div
+            key={i}
+            className="menu-dish transition-opacity duration-300"
+            style={{
+              opacity: i === active ? 1 : 0,
+              visibility: i === active ? "visible" : "hidden",
+              gridArea: "1 / 1",
+            }}
+          >
+            <h3 className="menu-title">
+              {item.title}
+              {item.badge && (
+                <span className="ml-2 inline-block align-middle text-[10px] font-medium px-1.5 py-0.5 border border-current opacity-60">
+                  {item.badge}
+                </span>
+              )}
+            </h3>
+            <p className="menu-description">{item.description}</p>
+          </div>
+        ))}
       </div>
 
       {items.length > 1 && (

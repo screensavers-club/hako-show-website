@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+h1.menu-main-heading {
+  @apply text-center w-full pt-10 text-xl;
+}
+
 .menu-section {
   @apply space-y-16;
 }
@@ -13,7 +17,7 @@ hr {
 }
 
 .menu-heading-note {
-  @apply text-base tracking-[0.3em] text-center text-gray-400;
+  @apply text-base text-center text-gray-400;
 }
 
 .menu-heading + .menu-heading-note {
@@ -29,9 +33,26 @@ hr {
 }
 
 .menu-subtitle {
-  @apply text-lg;
+  @apply text-lg text-gray-400;
 }
 
 .menu-description {
   @apply text-lg mt-4 leading-relaxed text-balance;
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.3s ease-out;
+}
+
+p.foot {
+  @apply w-full text-center;
 }

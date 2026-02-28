@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-const DATES = ["March 28", "March 29", "March 30"];
+const DATES = ["March 27", "March 28", "March 29"];
 const TIMES = ["18:00", "19:30"];
 
 type Status = "idle" | "submitting" | "success" | "error";
@@ -31,23 +31,22 @@ export default function RSVPForm() {
 
       if (!res.ok) {
         const data = await res.json();
-        throw new Error(data.error || "Something went wrong");
+        throw new Error(data.error || "エラーが発生しました");
       }
 
       setStatus("success");
     } catch (err) {
       setStatus("error");
-      setErrorMsg(err instanceof Error ? err.message : "Something went wrong");
+      setErrorMsg(err instanceof Error ? err.message : "エラーが発生しました");
     }
   }
 
   if (status === "success") {
     return (
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8 text-center">
-        <h2 className="text-2xl font-bold mb-2">You&apos;re all set!</h2>
+      <div className="w-full max-w-md p-8 text-center">
+        <h2 className="text-2xl font-bold mb-2">ご予約ありがとうございます</h2>
         <p className="text-gray-600 mb-6">
-          We&apos;ll see you on {date} at {time}. A confirmation will be sent to{" "}
-          {email}.
+          {date} {time} にお待ちしております。確認メールを {email} にお送りしました。
         </p>
         <button
           onClick={() => {
@@ -61,7 +60,7 @@ export default function RSVPForm() {
           }}
           className="text-sm text-[#88E2FD] hover:underline cursor-pointer"
         >
-          Make another reservation
+          別の予約をする
         </button>
       </div>
     );
@@ -70,17 +69,17 @@ export default function RSVPForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8"
+      className="w-full max-w-md p-8"
     >
-      <h1 className="text-2xl font-bold mb-1 text-center">Dining RSVP</h1>
+      <h1 className="text-2xl font-bold mb-1 text-center">ディナー予約</h1>
       <p className="text-gray-500 text-sm text-center mb-6">
-        March 28&ndash;30 &middot; Reserve your spot
+        3月27日〜29日 &middot; お席をご予約ください
       </p>
 
       <div className="space-y-4">
         <div>
           <label htmlFor="name" className="block text-sm font-medium mb-1">
-            Name
+            お名前
           </label>
           <input
             id="name"
@@ -94,7 +93,7 @@ export default function RSVPForm() {
 
         <div>
           <label htmlFor="email" className="block text-sm font-medium mb-1">
-            Email
+            メールアドレス
           </label>
           <input
             id="email"
@@ -108,14 +107,14 @@ export default function RSVPForm() {
 
         <div>
           <label htmlFor="phone" className="block text-sm font-medium mb-1">
-            Phone
+            電話番号
           </label>
           <input
             id="phone"
             type="tel"
             required
             pattern="[0-9+\-() ]{7,}"
-            title="Enter a valid phone number"
+            title="有効な電話番号を入力してください"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#88E2FD]"
@@ -123,11 +122,8 @@ export default function RSVPForm() {
         </div>
 
         <div>
-          <label
-            htmlFor="partySize"
-            className="block text-sm font-medium mb-1"
-          >
-            Party size
+          <label htmlFor="partySize" className="block text-sm font-medium mb-1">
+            人数
           </label>
           <select
             id="partySize"
@@ -136,9 +132,9 @@ export default function RSVPForm() {
             onChange={(e) => setPartySize(Number(e.target.value))}
             className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#88E2FD]"
           >
-            {Array.from({ length: 8 }, (_, i) => i + 1).map((n) => (
+            {Array.from({ length: 4 }, (_, i) => i + 1).map((n) => (
               <option key={n} value={n}>
-                {n} {n === 1 ? "guest" : "guests"}
+                {n}名
               </option>
             ))}
           </select>
@@ -147,7 +143,7 @@ export default function RSVPForm() {
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label htmlFor="date" className="block text-sm font-medium mb-1">
-              Date
+              日付
             </label>
             <select
               id="date"
@@ -166,7 +162,7 @@ export default function RSVPForm() {
 
           <div>
             <label htmlFor="time" className="block text-sm font-medium mb-1">
-              Time
+              時間
             </label>
             <select
               id="time"
@@ -194,7 +190,7 @@ export default function RSVPForm() {
         disabled={status === "submitting"}
         className="mt-6 w-full rounded-lg bg-[#88E2FD] py-2.5 text-sm font-semibold text-white shadow hover:bg-[#6dd4f5] disabled:opacity-50 cursor-pointer transition-colors"
       >
-        {status === "submitting" ? "Reserving..." : "Reserve"}
+        {status === "submitting" ? "予約中..." : "予約する"}
       </button>
     </form>
   );
