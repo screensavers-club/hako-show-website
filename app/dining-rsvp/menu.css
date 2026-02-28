@@ -5,7 +5,11 @@
 }
 
 .menu-heading {
-  @apply text-xs tracking-[0.3em] uppercase text-center;
+  @apply text-base tracking-[0.3em] uppercase text-center;
+}
+
+.menu-heading-note {
+  @apply text-xs tracking-[0.3em] text-center;
 }
 
 .menu-dish {
