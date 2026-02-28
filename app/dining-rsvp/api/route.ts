@@ -1,7 +1,57 @@
 import { NextResponse } from "next/server";
+import postmark from "postmark";
 
 const VALID_DATES = ["March 28", "March 29", "March 30"];
 const VALID_TIMES = ["18:00", "19:30"];
+
+const DRINK_MAP: Record<string, string> = {
+  "herby-baby": "Herby Baby",
+  "bitter-sour": "Bitter Sour",
+  "fresh-paloma": "Fresh Paloma",
+  "orange-brew": "Orange Brew",
+  "dark-roast": "Dark Roast Coffee",
+};
+
+async function sendNotificationEmail(data: {
+  name: string;
+  email: string;
+  phone: string;
+  partySize: number;
+  date: string;
+  time: string;
+  drinkPairing: string;
+  afterDinnerDrink: string;
+}) {
+  const POSTMARK_SERVER_TOKEN = process.env.POSTMARK_SERVER_TOKEN;
+  const NOTIFICATION_EMAIL = process.env.NOTIFICATION_EMAIL;
+
+  if (!POSTMARK_SERVER_TOKEN || !NOTIFICATION_EMAIL) {
+    console.error("Missing Postmark config");
+    return;
+  }
+
+  const client = new postmark.ServerClient(POSTMARK_SERVER_TOKEN);
+
+  const drinkText = data.drinkPairing ? DRINK_MAP[data.drinkPairing] || data.drinkPairing : "後で決める";
+  const afterDrinkText = data.afterDinnerDrink ? DRINK_MAP[data.afterDinnerDrink] || data.afterDinnerDrink : "後で決める";
+
+  await client.sendEmail({
+    From: NOTIFICATION_EMAIL,
+    To: NOTIFICATION_EMAIL,
+    Subject: `新規予約: ${data.name}様 (${data.date} ${data.time})`,
+    HtmlBody: `
+      <h2>新規予約</h2>
+      <p><strong>お名前:</strong> ${data.name}</p>
+      <p><strong>メールアドレス:</strong> ${data.email}</p>
+      <p><strong>電話番号:</strong> ${data.phone}</p>
+      <p><strong>人数:</strong> ${data.partySize}名</p>
+      <p><strong>日付:</strong> ${data.date}</p>
+      <p><strong>時間:</strong> ${data.time}</p>
+      <p><strong>食事のドリンク:</strong> ${drinkText}</p>
+      <p><strong>食後の一杯:</strong> ${afterDrinkText}</p>
+    `,
+  });
+}
 
 export async function POST(request: Request) {
   const body = await request.json();
@@ -62,6 +112,8 @@ export async function POST(request: Request) {
   }
 
   console.log("New reservation:", { name, email, phone, partySize: size, date, time, drinkPairing, afterDinnerDrink });
+
+  await sendNotificationEmail({ name, email, phone, partySize: size, date, time, drinkPairing, afterDinnerDrink });
 
   return NextResponse.json({ success: true });
 }
