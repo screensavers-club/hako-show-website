@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import MenuPopover from "./MenuPopover";
 
 const DATES = ["March 27", "March 28", "March 29"];
 const TIMES = ["18:00", "19:30"];
@@ -58,7 +59,7 @@ export default function RSVPForm() {
             setDate(DATES[0]);
             setTime(TIMES[0]);
           }}
-          className="text-sm text-[#88E2FD] hover:underline cursor-pointer"
+          className="text-sm text-[#3d4f5f] hover:underline cursor-pointer"
         >
           別の予約をする
         </button>
@@ -72,9 +73,12 @@ export default function RSVPForm() {
       className="w-full max-w-md p-8"
     >
       <h1 className="text-2xl font-bold mb-1 text-center">ディナー予約</h1>
-      <p className="text-gray-500 text-sm text-center mb-6">
+      <p className="text-gray-500 text-sm text-center mb-2">
         3月27日〜29日 &middot; お席をご予約ください
       </p>
+      <div className="text-center mb-6">
+        <MenuPopover />
+      </div>
 
       <div className="space-y-4">
         <div>
@@ -87,7 +91,7 @@ export default function RSVPForm() {
             required
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#88E2FD]"
+            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#3d4f5f]"
           />
         </div>
 
@@ -101,7 +105,7 @@ export default function RSVPForm() {
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#88E2FD]"
+            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#3d4f5f]"
           />
         </div>
 
@@ -117,7 +121,7 @@ export default function RSVPForm() {
             title="有効な電話番号を入力してください"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#88E2FD]"
+            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#3d4f5f]"
           />
         </div>
 
@@ -130,7 +134,7 @@ export default function RSVPForm() {
             required
             value={partySize}
             onChange={(e) => setPartySize(Number(e.target.value))}
-            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#88E2FD]"
+            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#3d4f5f]"
           >
             {Array.from({ length: 4 }, (_, i) => i + 1).map((n) => (
               <option key={n} value={n}>
@@ -150,7 +154,7 @@ export default function RSVPForm() {
               required
               value={date}
               onChange={(e) => setDate(e.target.value)}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#88E2FD]"
+              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#3d4f5f]"
             >
               {DATES.map((d) => (
                 <option key={d} value={d}>
@@ -169,7 +173,7 @@ export default function RSVPForm() {
               required
               value={time}
               onChange={(e) => setTime(e.target.value)}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#88E2FD]"
+              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#3d4f5f]"
             >
               {TIMES.map((t) => (
                 <option key={t} value={t}>
@@ -181,6 +185,17 @@ export default function RSVPForm() {
         </div>
       </div>
 
+      <label className="mt-4 flex items-start gap-2 text-sm text-gray-600 cursor-pointer">
+        <input
+          type="checkbox"
+          required
+          className="mt-0.5 accent-[#3d4f5f]"
+        />
+        <span>
+          メニューに記載のアレルゲン情報を確認し、了承しました。
+        </span>
+      </label>
+
       {status === "error" && (
         <p className="mt-4 text-sm text-red-600">{errorMsg}</p>
       )}
@@ -188,7 +203,7 @@ export default function RSVPForm() {
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="mt-6 w-full rounded-lg bg-[#88E2FD] py-2.5 text-sm font-semibold text-white shadow hover:bg-[#6dd4f5] disabled:opacity-50 cursor-pointer transition-colors"
+        className="mt-6 w-full rounded-lg bg-[#3d4f5f] py-2.5 text-sm font-semibold text-white shadow hover:bg-[#2e3d4d] disabled:opacity-50 cursor-pointer transition-colors"
       >
         {status === "submitting" ? "予約中..." : "予約する"}
       </button>
