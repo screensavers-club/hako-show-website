@@ -21,7 +21,7 @@ export default function MenuPopover() {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="text-sm text-gray-400 underline underline-offset-2 hover:text-gray-600 cursor-pointer transition-colors"
+        className="text-base underline underline-offset-2 hover:text-gray-600 cursor-pointer transition-colors"
       >
         メニューを見る
       </button>
