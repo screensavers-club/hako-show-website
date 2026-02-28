@@ -43,7 +43,7 @@ async function sendNotificationEmail(data: {
     From: "no-reply@kuku81.com",
     To: "kuku81com@gmail.com",
     Cc: "i@siah.sg",
-    Subject: `新規予約: ${data.name}様 (${data.date} ${data.time})`,
+    Subject: `HAKO DINING 新規予約: ${data.name}様 (${data.date} ${data.time})`,
     HtmlBody: `
       <h2>新規予約</h2>
       <p><strong>お名前:</strong> ${data.name}</p>
