@@ -97,7 +97,7 @@ export default function MenuPopover() {
                 <div className="menu-dish">
                   <h3 className="menu-title">Beef Rendang ブフ・レンダン</h3>
                   <p className="menu-subtitle">
-                    ペラナカン伝統の牛肉スパイス料理
+                    プラナカン伝統の牛肉スパイス料理
                   </p>
                   <p className="menu-description">
                     スパイスとハーブ、ココナッツミルクでじっくりと煮詰めたドライカレー仕立て。

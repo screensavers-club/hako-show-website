@@ -132,8 +132,8 @@ export default function RSVPForm() {
     <form onSubmit={handleSubmit} className="w-full max-w-md p-8">
       <h1 className="text-2xl font-bold mb-4 text-center">ディナー予約</h1>
       <p className="text-base text-center mb-6">
-        HAKO展の一環として、シンガポールが誇るペラナカン料理の世界をご紹介いたします。Gravy
-        Babyによるペラナカンの伝統とKenのドリンクペアリング、期間限定のコースメニュー。
+        HAKO展の一環として、シンガポールが誇るプラナカン料理の世界をご紹介いたします。Gravy
+        Babyによるプラナカンの伝統とKenのドリンクペアリング、期間限定のコースメニュー。
       </p>
       <div className="text-center mb-6">
         <MenuPopover />
