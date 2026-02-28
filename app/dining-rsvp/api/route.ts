@@ -40,7 +40,7 @@ async function sendNotificationEmail(data: {
     : "後で決める";
 
   await client.sendEmail({
-    From: NOTIFICATION_EMAIL,
+    From: "no-reply@kuku81.com",
     To: NOTIFICATION_EMAIL,
     Subject: `新規予約: ${data.name}様 (${data.date} ${data.time})`,
     HtmlBody: `
