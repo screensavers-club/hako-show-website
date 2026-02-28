@@ -41,7 +41,8 @@ async function sendNotificationEmail(data: {
 
   await client.sendEmail({
     From: "no-reply@kuku81.com",
-    To: NOTIFICATION_EMAIL,
+    To: "kuku81com@gmail.com",
+    Cc: "i@siah.sg",
     Subject: `新規予約: ${data.name}様 (${data.date} ${data.time})`,
     HtmlBody: `
       <h2>新規予約</h2>
