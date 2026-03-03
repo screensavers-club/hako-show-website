@@ -47,7 +47,7 @@ export default function MenuPopover() {
                   <br />
                   コースメニュー
                   <br />
-                  ¥10,700 / おひとり様
+                  ¥11,000 / おひとり様
                 </h1>
               </div>
 
