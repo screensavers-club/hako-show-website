@@ -151,7 +151,7 @@ function drawStampOnFaces(
   }
 }
 
-function TexturedBox() {
+function TexturedBox({ stampMode }: { stampMode: boolean }) {
   const faceTextures = useTexture(FACE_TEXTURES);
   const stampTextures = useTexture(STAMPS);
 
@@ -240,6 +240,7 @@ function TexturedBox() {
   const handleClick = useCallback(
     (e: ThreeEvent<MouseEvent>) => {
       e.stopPropagation();
+      if (!stampMode) return;
       if (!e.face || !e.uv) return;
 
       // Shift+click = undo last stamp
@@ -263,7 +264,7 @@ function TexturedBox() {
       stampLog.current.push(entry);
       applyStamp(entry);
     },
-    [stampTextures, applyStamp, redrawAll],
+    [stampMode, stampTextures, applyStamp, redrawAll],
   );
 
   return (
@@ -299,14 +300,14 @@ function AdaptiveCamera() {
 useTexture.preload(FACE_TEXTURES);
 useTexture.preload(STAMPS);
 
-export default function Scene() {
+export default function Scene({ stampMode = false }: { stampMode?: boolean }) {
   return (
     <Canvas
       camera={{ position: [3, 3, 3] }}
       gl={{ toneMapping: THREE.NoToneMapping }}
     >
       <AdaptiveCamera />
-      <TexturedBox />
+      <TexturedBox stampMode={stampMode} />
       <OrbitControls enableZoom={false} />
     </Canvas>
   );

@@ -9,6 +9,14 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --sky-blue: #88E2FD;
+  --bright-yellow: #FDF644;
+  --cardboard-tan: #B8956A;
+  --dark-ochre: #8B6914;
+  --cobalt-blue: #2B4AC7;
+  --stamp-red: #D32F2F;
+  --soft-pink: #F5B4C3;
+  --near-black: #1A1A1A;
 }
 
 @theme inline {
