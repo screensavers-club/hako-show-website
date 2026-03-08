@@ -4,7 +4,9 @@ import dynamic from "next/dynamic";
 import { useState } from "react";
 import NavButton from "./NavButton";
 
-const Scene = dynamic(() => import("./Scene"), { ssr: false }) as React.ComponentType<{
+const Scene = dynamic(() => import("./Scene"), {
+  ssr: false,
+}) as React.ComponentType<{
   stampMode?: boolean;
 }>;
 
@@ -30,10 +32,9 @@ export default function SceneLoader() {
       )}
       <button
         onClick={() => setStampMode((s) => !s)}
-        className="fixed top-4 left-4 z-50 flex h-12 w-12 cursor-pointer items-center justify-center rounded-lg border-2 transition-colors"
+        className="fixed top-2 right-2 z-50 flex h-12 w-12 cursor-pointer items-center justify-center transition-colors"
         style={{
-          backgroundColor: stampMode ? "#FFE500" : "rgba(255,255,255,0.85)",
-          borderColor: stampMode ? "#E0CC00" : "rgba(0,0,0,0.15)",
+          background: stampMode ? "var(--bright-yellow)" : "rgba(0,0,0,0.15)",
         }}
         title={stampMode ? "Stamp mode ON" : "Stamp mode OFF"}
       >
@@ -45,16 +46,44 @@ export default function SceneLoader() {
           xmlns="http://www.w3.org/2000/svg"
         >
           {/* Handle */}
-          <rect x="10" y="2" width="8" height="10" rx="2" fill={stampMode ? "#222" : "#666"} />
+          <rect
+            x="10"
+            y="2"
+            width="8"
+            height="10"
+            rx="2"
+            fill={stampMode ? "#222" : "#666"}
+          />
           {/* Base */}
-          <rect x="6" y="14" width="16" height="4" rx="1" fill={stampMode ? "#222" : "#666"} />
+          <rect
+            x="6"
+            y="14"
+            width="16"
+            height="4"
+            rx="1"
+            fill={stampMode ? "#222" : "#666"}
+          />
           {/* Pad */}
-          <rect x="4" y="19" width="20" height="5" rx="1.5" fill={stampMode ? "#D32F2F" : "#999"} />
+          <rect
+            x="4"
+            y="19"
+            width="20"
+            height="5"
+            rx="1.5"
+            fill={stampMode ? "#D32F2F" : "#999"}
+          />
         </svg>
       </button>
-      <div className="fixed top-4 left-18 z-50">
-        <NavButton active={showArtists} onClick={() => setShowArtists((s) => !s)}>
+      <div className="fixed top-2 left-2 z-50">
+        <NavButton
+          active={showArtists}
+          onClick={() => setShowArtists((s) => !s)}
+        >
           Artists
+        </NavButton>
+
+        <NavButton href="/dining-rsvp" className="">
+          Dining Experience
         </NavButton>
         {showArtists && (
           <div
@@ -75,10 +104,6 @@ export default function SceneLoader() {
           </div>
         )}
       </div>
-      <NavButton href="/dining-rsvp" className="fixed top-4 left-50 z-50">
-        Dining Experience
-      </NavButton>
-      <div className="fixed top-4 right-4 z-50 text-3xl">🇸🇬</div>
       <Scene stampMode={stampMode} />
     </>
   );

@@ -15,11 +15,8 @@ export default function NavButton({
   ...props
 }: NavButtonProps) {
   const base =
-    "flex h-12 cursor-pointer items-center justify-center rounded-lg border-2 px-4 text-sm font-semibold transition-colors";
+    "flex h-12 cursor-pointer items-center justify-center px-4 text-sm font-semibold transition-colors gap-2";
   const style = {
-    backgroundColor: active ? "var(--near-black)" : "rgba(255,255,255,0.85)",
-    borderColor: active ? "var(--near-black)" : "rgba(0,0,0,0.15)",
-    color: active ? "#fff" : "var(--near-black)",
     textDecoration: "none" as const,
   };
 
@@ -30,6 +27,12 @@ export default function NavButton({
         style={style}
         {...(props as React.AnchorHTMLAttributes<HTMLAnchorElement>)}
       >
+        <span
+          className="size-4 bg-black"
+          style={{
+            background: active ? "var(--soft-pink)" : "var(--foreground)",
+          }}
+        />
         {children}
       </a>
     );
@@ -41,6 +44,12 @@ export default function NavButton({
       style={style}
       {...(props as React.ButtonHTMLAttributes<HTMLButtonElement>)}
     >
+      <span
+        className="size-4 bg-black"
+        style={{
+          background: active ? "var(--soft-pink)" : "var(--foreground)",
+        }}
+      />
       {children}
     </button>
   );
