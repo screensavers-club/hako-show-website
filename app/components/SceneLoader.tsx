@@ -78,6 +78,14 @@ export default function SceneLoader() {
       <NavButton href="/dining-rsvp" className="fixed top-4 left-50 z-50">
         Dining Experience
       </NavButton>
+      <div className="fixed bottom-4 left-4 z-50 text-xs leading-relaxed text-gray-700">
+        <p>3/24(火)〜4/19(日)</p>
+        <p>11:00〜19:00</p>
+        <p>休日:月</p>
+        <p>入場料金・展示会:無料</p>
+        <p>・プライベートダイニング:有料</p>
+        <p>(席数限定、WEB予約受付中)</p>
+      </div>
       <div className="fixed top-4 right-4 z-50 text-3xl">🇸🇬</div>
       <Scene stampMode={stampMode} />
     </>
