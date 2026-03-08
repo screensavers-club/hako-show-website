@@ -15,7 +15,7 @@ export default function NavButton({
   ...props
 }: NavButtonProps) {
   const base =
-    "flex h-12 cursor-pointer items-center justify-center px-4 text-sm font-semibold transition-colors gap-2";
+    "flex cursor-pointer items-center justify-center text-base sm:text-xl transition-colors gap-2";
   const style = {
     textDecoration: "none" as const,
   };
@@ -47,7 +47,7 @@ export default function NavButton({
       <span
         className="size-4 bg-black"
         style={{
-          background: active ? "var(--soft-pink)" : "var(--foreground)",
+          background: active ? "var(--bright-yellow)" : "var(--foreground)",
         }}
       />
       {children}

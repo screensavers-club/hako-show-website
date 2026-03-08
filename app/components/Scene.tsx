@@ -1,6 +1,11 @@
 "use client";
 
-import { Canvas, useThree, type ThreeEvent } from "@react-three/fiber";
+import {
+  Canvas,
+  useFrame,
+  useThree,
+  type ThreeEvent,
+} from "@react-three/fiber";
 import { OrbitControls, useTexture } from "@react-three/drei";
 import { useEffect, useRef, useMemo, useCallback } from "react";
 import * as THREE from "three";
@@ -31,7 +36,27 @@ const STAMPS = [
 type StampEntry = [number, number, number, number, number];
 
 // Paste your captured stamps here:
-const DEFAULT_STAMPS: StampEntry[] = [[2,4,0.588551253402031,0.9865321536742868,5.864885447653136],[0,0,0.40143776121694863,0.6488152723347522,3.064103104769041],[0,4,0.5511567189201052,0.031716662531871886,5.252740108566679],[1,0,0.03190633674434462,0.2908859462991693,0.9359248371946877],[4,4,0.05521181914245887,0.8437371623669496,0.11699266117937789],[5,4,0.969458143019382,0.7148271824932597,3.224630173064175],[1,4,0.8988894258271728,0.9169033541042344,2.898015257321131],[3,4,0.3331216911738675,0.9780811807448366,1.2751774999993328],[3,0,0.5139871935390032,0.2568371606827613,4.077438551709822],[5,0,0.8542628865179783,0.9083832057661281,1.0869933198120554],[3,0,0.7505590319839683,0.5572620123413006,3.280131602770471],[0,5,0.6953208056904384,0.5163665760831385,2.218773001634088],[3,5,0.6159203253323562,0.9276708132865273,0.9403637054280312],[4,1,0.45926836971377605,0.3389379882645934,4.9999787101659185],[5,1,0.727808395397427,0.03271508517149535,2.903797083601369],[2,3,0.6811690819037226,0.20301354256003312,5.841239837093392],[1,5,0.29057327476646605,0.3671035838415671,0.1862421574237744],[3,2,0.015156846383185096,0.4923865813949038,5.328897032866062],[2,2,0.8884417051778308,0.5310481051944447,2.0080524480857638]];
+const DEFAULT_STAMPS: StampEntry[] = [
+  [2, 4, 0.588551253402031, 0.9865321536742868, 5.864885447653136],
+  [0, 0, 0.40143776121694863, 0.6488152723347522, 3.064103104769041],
+  [0, 4, 0.5511567189201052, 0.031716662531871886, 5.252740108566679],
+  [1, 0, 0.03190633674434462, 0.2908859462991693, 0.9359248371946877],
+  [4, 4, 0.05521181914245887, 0.8437371623669496, 0.11699266117937789],
+  [5, 4, 0.969458143019382, 0.7148271824932597, 3.224630173064175],
+  [1, 4, 0.8988894258271728, 0.9169033541042344, 2.898015257321131],
+  [3, 4, 0.3331216911738675, 0.9780811807448366, 1.2751774999993328],
+  [3, 0, 0.5139871935390032, 0.2568371606827613, 4.077438551709822],
+  [5, 0, 0.8542628865179783, 0.9083832057661281, 1.0869933198120554],
+  [3, 0, 0.7505590319839683, 0.5572620123413006, 3.280131602770471],
+  [0, 5, 0.6953208056904384, 0.5163665760831385, 2.218773001634088],
+  [3, 5, 0.6159203253323562, 0.9276708132865273, 0.9403637054280312],
+  [4, 1, 0.45926836971377605, 0.3389379882645934, 4.9999787101659185],
+  [5, 1, 0.727808395397427, 0.03271508517149535, 2.903797083601369],
+  [2, 3, 0.6811690819037226, 0.20301354256003312, 5.841239837093392],
+  [1, 5, 0.29057327476646605, 0.3671035838415671, 0.1862421574237744],
+  [3, 2, 0.015156846383185096, 0.4923865813949038, 5.328897032866062],
+  [2, 2, 0.8884417051778308, 0.5310481051944447, 2.0080524480857638],
+];
 
 // ---------------------------------------------------------------------------
 // Face-edge adjacency with UV transforms.
@@ -188,7 +213,17 @@ function TexturedBox({ stampMode }: { stampMode: boolean }) {
       const aspect = img.naturalWidth / img.naturalHeight;
       const stampW = S * STAMP_SCALE;
       const stampH = stampW / aspect;
-      drawStampOnFaces(img, canvases, materials, face, u, v, stampW, stampH, angle);
+      drawStampOnFaces(
+        img,
+        canvases,
+        materials,
+        face,
+        u,
+        v,
+        stampW,
+        stampH,
+        angle,
+      );
     },
     [canvases, materials, stampTextures],
   );
@@ -267,14 +302,50 @@ function TexturedBox({ stampMode }: { stampMode: boolean }) {
     [stampMode, stampTextures, applyStamp, redrawAll],
   );
 
+  // Drop animation state
+  const meshRef = useRef<THREE.Mesh>(null);
+  const dropStart = useRef(performance.now());
+  const DROP_DURATION = 2; // seconds
+  const DROP_FROM = 12; // start Y position (above view)
+
+  useFrame(() => {
+    if (!meshRef.current) return;
+    const elapsed = (performance.now() - dropStart.current) / 1000;
+    if (elapsed >= DROP_DURATION) {
+      meshRef.current.position.y = 0;
+      meshRef.current.rotation.z = 0;
+      return;
+    }
+    const t = elapsed / DROP_DURATION;
+    // Drop from above, bounce at y=0
+    const y = DROP_FROM * (1 - bounceOut(t));
+    meshRef.current.position.y = y;
+    // Slight yaw wobble that settles with the bounce
+    const wobble = 0.12 * Math.sin(t * Math.PI * 3) * (1 - t);
+    meshRef.current.rotation.z = wobble;
+  });
+
   return (
-    <mesh onClick={handleClick}>
+    <mesh ref={meshRef} onClick={handleClick} position={[0, DROP_FROM, 0]}>
       <boxGeometry args={[2, 2, 2]} />
       {materials.map((mat, i) => (
         <primitive key={i} object={mat} attach={`material-${i}`} />
       ))}
     </mesh>
   );
+}
+
+// Gentle bounce-out easing: 0→1 with one small bounce
+function bounceOut(t: number): number {
+  if (t < 0.7) {
+    // Main drop
+    const n = t / 0.7;
+    return n * n;
+  } else {
+    // Single small bounce (peaks ~0.04 above 1.0)
+    const n = (t - 0.85) / 0.15;
+    return 1 - 0.04 * (1 - n * n);
+  }
 }
 
 function AdaptiveCamera() {
@@ -284,7 +355,7 @@ function AdaptiveCamera() {
     const cam = camera as THREE.PerspectiveCamera;
     const distance = cam.position.length();
     const aspect = size.width / size.height;
-    const boundingRadius = Math.sqrt(3);
+    const boundingRadius = Math.sqrt(2);
     const fitDim = Math.min(1, aspect);
     cam.fov =
       2 *
@@ -303,7 +374,7 @@ useTexture.preload(STAMPS);
 export default function Scene({ stampMode = false }: { stampMode?: boolean }) {
   return (
     <Canvas
-      camera={{ position: [3, 3, 3] }}
+      camera={{ position: [1.5, 2.5, 5] }}
       gl={{ toneMapping: THREE.NoToneMapping }}
     >
       <AdaptiveCamera />
