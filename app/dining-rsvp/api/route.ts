@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import postmark from "postmark";
 
 const VALID_DATES = ["March 27", "March 28", "March 29"];
-const VALID_TIMES = ["18:00", "19:30"];
+const VALID_TIMES = ["18:00", "20:00"];
 
 const DRINK_MAP: Record<string, string> = {
   "herby-baby": "Herby Baby",
