@@ -95,7 +95,7 @@ export default function MenuPopover() {
                   テーブルを囲んでお分けしながら
                 </p>
                 <div className="menu-dish">
-                  <h3 className="menu-title">Beef Rendang ブーフ・レンダン</h3>
+                  <h3 className="menu-title">Beef Rendang ビーフ・レンダン</h3>
                   <p className="menu-subtitle">
                     プラナカン伝統の牛肉スパイス料理
                   </p>
