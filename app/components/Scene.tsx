@@ -362,6 +362,13 @@ function AdaptiveCamera() {
       THREE.MathUtils.radToDeg(
         Math.atan(boundingRadius / (0.85 * fitDim * distance)),
       );
+    // On portrait/mobile, shift the box up by 10% of the view
+    const isMobile = aspect < 1;
+    const yOffset = isMobile
+      ? Math.tan(THREE.MathUtils.degToRad(cam.fov / 2)) * distance * 0.2
+      : 0;
+    cam.position.y = 2.5;
+    cam.lookAt(0, -yOffset, 0);
     cam.updateProjectionMatrix();
   }, [camera, size]);
 

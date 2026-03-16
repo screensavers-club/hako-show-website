@@ -150,7 +150,7 @@ export default function SceneLoader() {
         スタンプ
       </button>
       <div
-        className={`fixed z-50 ${stampMode ? "top-8 left-8" : "top-4 left-4"} transition-all flex gap-8 hidden`}
+        className={`fixed z-50 ${stampMode ? "top-8 left-8" : "top-4 left-4"} transition-all flex gap-8 `}
       >
         <div className="relative">
           <NavButton
