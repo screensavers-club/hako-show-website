@@ -3,7 +3,7 @@
 import { useState } from "react";
 import MenuPopover from "./MenuPopover";
 
-const DATES = ["March 27", "March 29"];
+const DATES = ["March 29"];
 const TIMES = ["20:00"];
 const DRINK_PAIRINGS = [
   {
