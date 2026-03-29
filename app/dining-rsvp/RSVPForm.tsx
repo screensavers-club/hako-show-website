@@ -57,6 +57,17 @@ const AFTER_DINNER_DRINKS = [
 type Status = "idle" | "submitting" | "success" | "error";
 
 export default function RSVPForm() {
+  return (
+    <div className="w-full max-w-md p-8 text-center">
+      <h2 className="text-2xl font-bold mb-2">ご来場ありがとうございました</h2>
+      <p className="text-gray-600">
+        イベントは終了しました。ご参加いただき、誠にありがとうございました。
+      </p>
+    </div>
+  );
+}
+
+function RSVPFormDisabled() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
