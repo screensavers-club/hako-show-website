@@ -1,28 +1,85 @@
 "use client";
 
-import { useState } from "react";
-import { sections, type Section } from "./data";
+import { useState, type ReactNode } from "react";
+import { sections, type EmbeddedQuote, type Section } from "./data";
 
 type Lang = "en" | "ja";
 
+function renderInline(text: string, keyPrefix: string): ReactNode[] {
+  return text.split(/(\*[^*\n]+\*)/g).map((part, i) => {
+    if (part.startsWith("*") && part.endsWith("*") && part.length > 2) {
+      return <em key={`${keyPrefix}-${i}`}>{part.slice(1, -1)}</em>;
+    }
+    return <span key={`${keyPrefix}-${i}`}>{part}</span>;
+  });
+}
+
 function renderParagraph(text: string, key: string) {
-  const parts = text.split(/(\*[^*\n]+\*)/g);
   return (
     <p key={key} className="mb-4 last:mb-0">
-      {parts.map((part, i) => {
-        if (part.startsWith("*") && part.endsWith("*") && part.length > 2) {
-          return <em key={i}>{part.slice(1, -1)}</em>;
-        }
-        return <span key={i}>{part}</span>;
-      })}
+      {renderInline(text, key)}
     </p>
   );
 }
 
-function renderBody(text: string, keyPrefix: string) {
-  return text
-    .split(/\n\n+/)
-    .map((para, i) => renderParagraph(para, `${keyPrefix}-${i}`));
+function EmbeddedQuoteBlock({
+  quote,
+  lang,
+  keyPrefix,
+}: {
+  quote: EmbeddedQuote;
+  lang: Lang;
+  keyPrefix: string;
+}) {
+  const text = lang === "en" ? quote.en : quote.ja;
+  const title = lang === "en" ? quote.title_en : quote.title_ja;
+  const stanzas = text.split(/\n\n+/);
+  return (
+    <div className="my-8">
+      {title && (
+        <h3
+          className="italic text-lg mb-4"
+          style={{ fontFamily: "var(--font-hina-mincho), serif" }}
+        >
+          {title}
+        </h3>
+      )}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-4 italic text-sm leading-relaxed pl-4 md:pl-6">
+        {stanzas.map((stanza, i) => (
+          <div
+            key={`${keyPrefix}-stanza-${i}`}
+            className="whitespace-pre-line"
+          >
+            {renderInline(stanza, `${keyPrefix}-stanza-${i}`)}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function renderBody(
+  text: string,
+  keyPrefix: string,
+  lang: Lang,
+  embeddedQuote?: EmbeddedQuote,
+): ReactNode[] {
+  const paragraphs = text.split(/\n\n+/);
+  const out: ReactNode[] = [];
+  paragraphs.forEach((para, i) => {
+    out.push(renderParagraph(para, `${keyPrefix}-p-${i}`));
+    if (embeddedQuote && i === embeddedQuote.insertAfterParagraph - 1) {
+      out.push(
+        <EmbeddedQuoteBlock
+          key={`${keyPrefix}-quote`}
+          quote={embeddedQuote}
+          lang={lang}
+          keyPrefix={`${keyPrefix}-quote`}
+        />,
+      );
+    }
+  });
+  return out;
 }
 
 function SectionBlock({
@@ -56,7 +113,12 @@ function SectionBlock({
             </h2>
           )}
           <div className="text-base">
-            {renderBody(section.english, `${section.id}-en`)}
+            {renderBody(
+              section.english,
+              `${section.id}-en`,
+              "en",
+              section.embeddedQuote,
+            )}
           </div>
         </div>
         <div lang="ja" className={`leading-relaxed ${jaVisibility}`}>
@@ -69,7 +131,12 @@ function SectionBlock({
             </h2>
           )}
           <div className="text-base">
-            {renderBody(section.japanese, `${section.id}-ja`)}
+            {renderBody(
+              section.japanese,
+              `${section.id}-ja`,
+              "ja",
+              section.embeddedQuote,
+            )}
           </div>
         </div>
       </div>

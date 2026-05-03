@@ -1,3 +1,11 @@
+export type EmbeddedQuote = {
+  title_en: string;
+  title_ja: string;
+  en: string;
+  ja: string;
+  insertAfterParagraph: number;
+};
+
 export type Section = {
   id: number;
   title_en: string;
@@ -5,6 +13,7 @@ export type Section = {
   author: string | null;
   english: string;
   japanese: string;
+  embeddedQuote?: EmbeddedQuote;
 };
 
 export const sections: Section[] = [
@@ -55,22 +64,19 @@ export const sections: Section[] = [
     title_ja: "無を閉じ込める箱",
     author: "Featured artist: Wu Yanrong / ウー・イェンロン",
     english:
-      'In Wu Yanrong\'s painting, the eye is drawn immediately to each singular object centred within the confines of the paper edge. Yet, these sea creatures seemingly pulse with life through the ebb and flow of deliberate brushstrokes, holding an energy undeterred by the canvas framing them. The "box" thus serves only to "catch" them as we would catch a glimpse. This momentary gaze travels naturally from the dense coalescence of paint in a tight curve forming the octopus\'s head in GUN, following the flick of each individual arm flaunting their dexterity, before landing on the menacing glint of the lively eye. The unrestrained spattering of dots on the fish in 1100 is a fleeting reflection of light on scales. In her creatures, reality is secondary; essence is paramount.\n\nWu Yanrong\'s background in Chinese calligraphy shines through the confidence of each stroke—no doubt the result of countless experiments. What looms before us is the concentration of practice, extended from mind to body, and finally through the tip of the brush.',
+      'In Wu Yanrong\'s painting, the eye is drawn immediately to each singular object centred within the confines of the paper edge. Yet, these sea creatures seemingly pulse with life through the ebb and flow of deliberate brushstrokes, holding an energy undeterred by the canvas framing them. The "box" thus serves only to "catch" them as we would catch a glimpse. This momentary gaze travels naturally from the dense coalescence of paint in a tight curve forming the octopus\'s head in GUN, following the flick of each individual arm flaunting their dexterity, before landing on the menacing glint of the lively eye. The unrestrained spattering of dots on the fish in 1100 is a fleeting reflection of light on scales. In her creatures, reality is secondary; essence is paramount.\n\nWu Yanrong\'s background in Chinese calligraphy shines through the confidence of each stroke—no doubt the result of countless experiments. What looms before us is the concentration of practice, extended from mind to body, and finally through the tip of the brush.\n\nChinese painting has often been defined by its use of "虚", translated to mean the "void" or "nothingness"—one of the cornerstones of Dao philosophy⁴. Similarly, the use of a box is in the space it "contains". Allowing space for the audience to interpret meaning from a lack of detail is seen as genius, and achievable only through stoic observation of the living subject. Ironically, the artist encountered these subjects at the seafood wholesale marketplace in Takamatsu—chaos to the unfamiliar observer, systematic to those whose livelihoods depend on it, and a death sentence to the beings confined to their styrofoam prisons. Yet, she erases these physical boundaries with the calm of the void, lifting only the vitality of the creatures in a moment where their future remains unknown, and laying them down on a sheet.',
     japanese:
-      "ウー・イェンロンの絵画では、紙の縁という境界の中に据えられた一つひとつの対象に、視線がすぐに引き寄せられます。しかし、それらの海の生きものたちは、意図的な筆致の満ち引きを通じて生命の脈動を感じさせ、キャンバスという枠に阻まれることのないエネルギーを宿しています。ここでの「箱」は、ちらりと目に留めるように、ただそれらを「捉える」ためだけに存在しています。この束の間のまなざしは、GUNにおけるタコの頭を形づくる絵具の密な集積から自然に移動し、それぞれの腕がしなやかさを誇示するように跳ねる動きを追い、やがて生き生きとした目の不穏な輝きへとたどり着きます。1100における魚の上に奔放に散らされた点は、鱗に映る光の一瞬の反射です。彼女の描く生きものにおいて、写実は二の次であり、本質こそが最も重要なのです。\n\nウー・イェンロンの中国書道の素養は、一筆一筆の確信に満ちた運びに表れています。それは無数の実験の結果であることに疑いはありません。私たちの前に立ち現れるのは、精神から身体へ、そして最後に筆先を通じて延びてゆく、鍛錬の凝縮です。",
+      "ウー・イェンロンの絵画では、紙の縁という境界の中に据えられた一つひとつの対象に、視線がすぐに引き寄せられます。しかし、それらの海の生きものたちは、意図的な筆致の満ち引きを通じて生命の脈動を感じさせ、キャンバスという枠に阻まれることのないエネルギーを宿しています。ここでの「箱」は、ちらりと目に留めるように、ただそれらを「捉える」ためだけに存在しています。この束の間のまなざしは、GUNにおけるタコの頭を形づくる絵具の密な集積から自然に移動し、それぞれの腕がしなやかさを誇示するように跳ねる動きを追い、やがて生き生きとした目の不穏な輝きへとたどり着きます。1100における魚の上に奔放に散らされた点は、鱗に映る光の一瞬の反射です。彼女の描く生きものにおいて、写実は二の次であり、本質こそが最も重要なのです。\n\nウー・イェンロンの中国書道の素養は、一筆一筆の確信に満ちた運びに表れています。それは無数の実験の結果であることに疑いはありません。私たちの前に立ち現れるのは、精神から身体へ、そして最後に筆先を通じて延びてゆく、鍛錬の凝縮です。\n\n中国絵画はしばしば「虚」の使用によって定義されてきました。「虚」とは「空（くう）」あるいは「無」を意味し、道教哲学の礎石の一つです⁴。同様に、箱の用途は、それが「内包する」空間にあります。細部の欠如から意味を読み取る余白を鑑賞者に委ねることは、天才的な技とされ、生きた対象に対する禁欲的な観察によってのみ到達しうるものです。皮肉なことに、このアーティストは高松の水産物卸売市場でこれらの対象と出会いました。馴染みのない者にとっては混沌であり、生計を立てる者にとっては秩序であり、発泡スチロールの牢獄に閉じ込められた生きものたちにとっては死の宣告である場所です。しかし彼女は、虚の静けさをもってその物理的な境界を消し去り、未来がまだ定まらぬ一瞬における生きものたちの生命力だけを掬い上げ、一枚の紙の上に置くのです。",
+    embeddedQuote: {
+      title_en: "The Uses of Not",
+      title_ja: "「無」の用",
+      en: "Hollowed out,\nclay makes a pot.\nWhere the pot's not,\nis where it's useful.\n\nCut doors and windows\nto make a room.\nWhere the room isn't\nthere's room for you.\n\nSo the profit in what is\n*Is in the use of what isn't.*³",
+      ja: "うつろにして\n土は器となる。\n器でないところにこそ\n器の用がある。\n\n戸や窓をうがって\n部屋をつくる。\n部屋でないところにこそ\n人の居場所がある。\n\n「有」の利は\n*「無」の用にある。*³",
+      insertAfterParagraph: 2,
+    },
   },
   {
     id: 6,
-    title_en: "The Uses of Not",
-    title_ja: "「無」の用",
-    author: null,
-    english:
-      'Chinese painting has often been defined by its use of "虚", translated to mean the "void" or "nothingness"—one of the cornerstones of Dao philosophy⁴. Similarly, the use of a box is in the space it "contains". Allowing space for the audience to interpret meaning from a lack of detail is seen as genius, and achievable only through stoic observation of the living subject. Ironically, the artist encountered these subjects at the seafood wholesale marketplace in Takamatsu—chaos to the unfamiliar observer, systematic to those whose livelihoods depend on it, and a death sentence to the beings confined to their styrofoam prisons. Yet, she erases these physical boundaries with the calm of the void, lifting only the vitality of the creatures in a moment where their future remains unknown, and laying them down on a sheet.\n\nHollowed out, clay makes a pot. Where the pot\'s not, is where it\'s useful. Cut doors and windows to make a room. Where the room isn\'t there\'s room for you. So the profit in what is *Is in the use of what isn\'t.*³',
-    japanese:
-      "中国絵画はしばしば「虚」の使用によって定義されてきました。「虚」とは「空（くう）」あるいは「無」を意味し、道教哲学の礎石の一つです⁴。同様に、箱の用途は、それが「内包する」空間にあります。細部の欠如から意味を読み取る余白を鑑賞者に委ねることは、天才的な技とされ、生きた対象に対する禁欲的な観察によってのみ到達しうるものです。皮肉なことに、このアーティストは高松の水産物卸売市場でこれらの対象と出会いました。馴染みのない者にとっては混沌であり、生計を立てる者にとっては秩序であり、発泡スチロールの牢獄に閉じ込められた生きものたちにとっては死の宣告である場所です。しかし彼女は、虚の静けさをもってその物理的な境界を消し去り、未来がまだ定まらぬ一瞬における生きものたちの生命力だけを掬い上げ、一枚の紙の上に置くのです。\n\nうつろにして 土は器となる。器でないところにこそ 器の用がある。戸や窓をうがって 部屋をつくる。部屋でないところにこそ 人の居場所がある。「有」の利は *「無」の用にある。*³",
-  },
-  {
-    id: 7,
     title_en: "A box, objectifying risk and motion",
     title_ja: "リスクと動きを物象化する箱",
     author: "Featured artist: Chong Wah / チョン・ワー",
@@ -80,7 +86,7 @@ export const sections: Section[] = [
       "逆に、チョン・ワーの作品の中に虚を見出すのは難しいかもしれません。それどころか、一見しただけでは対象すら判然としないでしょう。ウー・イェンロンのキャンバスのミニマリズムから、端から端へと弾け飛ぶ彼のダイナミックな線へと移ることは、瞑想の状態からいきなりスポーツアリーナに目覚めるようなものです。動きの流れに着想を得て、鋭い角度と緊密に交差する線は、秩序ある無作為の実践であり、フレームの中にかろうじて収まった、不安すれすれの興奮を宿しています。現在のバイクへの執着を魅了の起点として、チョン・ワーはマシンを単なる静止した金属の塊としてではなく、その騒音、動き、個性を内包する存在として捉えます。\n\nシンガポールでバイクに乗る人に向けた中国語の定番の警告はこうです。「駕車是鐵包人，駕摩托車是人包鐵」。車では人間が金属の箱に「包まれ」ているが、バイクでは金属が人間に「包まれ」ており、囲いの外で無防備だということです。このリスクに伴うスリルは、アーティストの線の即興性に反映されており、それは現在も続くグラフィティの実践から培われたスタイルです。公共空間におけるグラフィティの限られた寿命は、プレイヤーたちの間での暗黙の了解です。設営中の即興的な判断から生まれたチョン・ワーの線は、ペインターズテープを用いて「キャンバス」の外へと広がり、展示空間を堂々と占拠する一時的な「壁画」を形成しています。\n\n静止に抗うかのような彼の躍動的な構図を見ると、芸術における未来派の運動（1909年）を想起する人もいるかもしれません。世界は常に運動しているという認識に立ち、バイクを主題として用いた唯一の近代芸術運動でした。未来派が一般的に表現したのは、空間を通じた物体の方向的傾向を伝える「力線」、記憶と現在の印象と未来の予測を統合する「同時性」、そして外部の情景と内面の感情の間に直感的に共感を結ぼうとする「感情的雰囲気」です⁵。未来派がチョン・ワーと同様にスピードと騒音の抽象的表現を礼賛したことは明らかですが、後者の作品はそのエネルギーの封じ込め方において異なります。線は跳ね回り、やがて一つの実体へと回帰します。皮肉なことに、未来派が爆発的にキャンバスから飛び出そうとしたのに対し、チョン・ワーはキャンバスそのものを再定義することで、孤独な構図の周囲に箱を形づくったのです。",
   },
   {
-    id: 8,
+    id: 7,
     title_en: "A box, a fragile conundrum",
     title_ja: "脆い難問としての箱",
     author: "Featured artist: Kelly Jin Mei / ケリー・ジン・メイ",
@@ -90,7 +96,7 @@ export const sections: Section[] = [
       "箱は繊細なものを守るために収めることもあります。しかし、ファベルジェの卵のように、箱そのものが貴重な場合はどうでしょうか？ ケリー・ジン・メイの彫刻作品「JPY50,000（SGD414.94）」は、時間の価値についての瞑想です。この「箱」は5枚の1万円札を内包しており、「壁」の隙間から中身が見えています。そしてタイトルに記された金額で販売されています⁶。ただし条件があります。紙幣を手にするには、箱を破壊しなければならないのです。一見簡単に思えますが、よく見ると、その不思議な素材の正体に気づきます。見覚えのあるきしむような光沢、何百、何千もの繊維の端が反抗的に突き出ている。それは髪の毛です。アーティストは2年間にわたって集めた自身の髪を使い、それを編み込んで閉じ込められたお金を包む網をつくりました。髪は無料であり、ほとんどの人間が持っているものですが、その長さは経過した時間の反映であり、精緻な編み込みは手間のかかる工芸の証です。\n\nジン・メイの実践では、鑑賞者に自らの価値認識を問い直させるようなパラドックスがしばしば用いられます。もし髪と労働に物質的な価値がないのであれば、なぜ彫刻を購入し、それを壊して損失を取り戻すことを躊躇するのでしょうか？ 所有しているという事実は、何かを破壊する権利を与えるのでしょうか？ このアーティストは過去の作品においてもつくる者と壊す者の両方の役割を演じ、鑑賞者の共感を観察してきました。今回、彼女は鑑賞者をその立場に招き入れ、支点の上に座らせます。5万円と引き換えに、何を犠牲にしなければならないのか？ アーティストはこの難問を通じて「ハードパワー」に対する「ソフトパワー」を示し、攻撃よりも感情的操作の有効性を示唆しています。",
   },
   {
-    id: 9,
+    id: 8,
     title_en: "A box, holding heritage and conversation",
     title_ja: "遺産と対話を宿す箱",
     author:
@@ -101,7 +107,7 @@ export const sections: Section[] = [
       "高松は、瀬戸内国際芸術祭の開催都市の一つであり、四国遍路の一部でもあることから、これまでにも多くの外国人を迎えてきました。それにもかかわらず、「プラナカン」のアイデンティティは地元ではまだあまり知られていません。グレイビー・ベイビーのカルメン・チェンは、その独自の料理を高松に紹介します。自身のルーツに根ざした味と技法を大切にしながらも、伝統の枠を超えた挑戦を試みています。マレーと中国の調理法を融合させ、ココナッツミルクをはじめとする東南アジアで自然に手に入るスパイスや重要な食材を用いるプラナカン料理は、濃厚なグレービー、豊かな香り、そして細部へのこだわりで知られています。\n\n日本とプラナカンの文化に一つの共通点があるとすれば、それは「包装」への執着でしょう。両文化とも、隠すことで食欲をそそることを喜びとしているようです。ただしプラナカンのクエ（米粉やタピオカ澱粉でつくられる一口サイズの菓子）の場合、「包装」は調理法の一部でもあります。生の材料をパンダンの葉や竹の葉でしっかりと包んでから蒸すことで、葉の香りが中に移ります。これらの包まれた「食の小包」は、プラナカンの遺産の誕生を映し出しています。移住した人々が定着し、現地の影響を吸収していった歴史です。ここでの「箱」は境界ではなく、器です。容器というよりもむしろ船であり、運び、吸収し、包んだものそのものになっていくのです。\n\n日本ではまだあまり一般的ではありませんが、プライベートダイニングの体験は、2020年の世界的パンデミック以降、シンガポールで人気を博しています⁷。ロックダウン後の商業賃料の高騰と料理技術の研鑽が重なり、自宅のダイニングルームを一般に開放する人々が自然と増えていきました。人々が繰り返し訪れたのは、独自のメニューだけでなく、そこで交わされる会話のためでもありました。画面に向き合うことが増え、一人でテイクアウトの食事を取ることが多くなった現代社会において、共同の食事体験は、居心地のよい殻から人を引き出し、見知らぬ人の隣に座らせます。新しい空間の光、異国の味わい、そして何より馴染みのない美的感覚に浸される中で、舌は自然と会話へとほぐれていきます。長いテーブルを囲み、大皿を分かち合うグレイビー・ベイビーのダイニング体験は、まるでパフォーマンスのように進行します。料理の合間にアーティストたちが作品について率直に語り、ぎこちない会話をほぐす処方箋であるドリンクとともに供されます。",
   },
   {
-    id: 10,
+    id: 9,
     title_en: "A box, as something you think out of",
     title_ja: "箱の外で考えるということ",
     author: "Featured artist: Ken / ケン",
@@ -111,7 +117,7 @@ export const sections: Section[] = [
       "ケンは、それぞれの料理の味わいに合わせた心のこもった飲み物を用意します。料理を一つのハーモニーある協奏曲へとまとめ上げる、楽しい驚きの連続です。クラシックな飲み物を実験の出発点とし、素材は通常の用途を超えて再定義されます。\n\n最初に登場するのは、トマト、紫蘇、オリーブオイル。サラダを想像するかもしれませんが、実際にはその温度と酸味で味覚を衝撃するスラッシーです。柑橘系のパロマ・カクテルは、日本の環境に寄り添い、地元の日本酒を取り入れています。夜の締めくくりは二つの選択肢があります。イタリア式に、シンガポールの焙煎所の豆を使ったダークローストのコーヒーか、中国式に、珍重される鴨屎香茶（やしこうちゃ）か。\n\n素材もスタイルも新しいわけではありません。しかし引き出しが入れ替えられ、異なる箪笥の間で交換され、古典が新しい文脈の中で考え直されているのです。",
   },
   {
-    id: 11,
+    id: 10,
     title_en: "",
     title_ja: "",
     author: null,
@@ -121,7 +127,7 @@ export const sections: Section[] = [
       "物事を定義し、分類し、整理することで理解しようとするのは、前述の性格テストにも見られるように、人間を魅了し続ける生存の技です。しかしそうした分類体系は主観的であり、とりわけ進化し続ける生きた存在に対しては限定的なものになりかねません。効率化の期待に挑みながら、参加クリエイターたちは媒体や分野の間を自由に横断しています。展覧会そのものの形式もまた、ギャラリー空間の白い壁を取り払い、受動的な鑑賞を、言語を超えた一つのものを通じた能動的な対話へと変えています。それは、食という営みです。\n\n典型的な箱の輪郭は、その外で考えることによって、その内部の空間について考えることによって、あるいはそれを完全に超越することによって、つくり変えられてきました。即興的な筆致がウー・イェンロンとチョン・ワーの作品をつないでいます。グレイビー・ベイビーとケンによるディナーは、物事を分解し、異なるかたちで組み直すという営みの産物であり、チョン・ワーによるバイクの再解釈と響き合います。皮肉にもライダーという人間に守られた彼の意外な鎧は、ケリーの髪による脆い囲いと共鳴しています。その囲いは中身を見せることで意味を帯びるのであり、それはシアの開かれた「箱」が私たちにテクノロジーとより親密に出会わせてくれるのと同じです。\n\n私たちが部屋という物理的な箱に、レッテルという心理的な箱に、次第に自らを閉じ込めていく世界において、HAKOは箱を想像力を妨げるものではなく喚起するものとして、排除ではなく包摂のために使うことを実践しています。そうして鑑賞者を、自分自身の比喩的な箱のかたちについて思いを巡らせる対話へと招き入れるのです。",
   },
   {
-    id: 12,
+    id: 11,
     title_en: "Footnotes",
     title_ja: "脚注",
     author: null,
