@@ -46,10 +46,7 @@ function EmbeddedQuoteBlock({
       )}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-4 italic text-sm leading-relaxed pl-4 md:pl-6">
         {stanzas.map((stanza, i) => (
-          <div
-            key={`${keyPrefix}-stanza-${i}`}
-            className="whitespace-pre-line"
-          >
+          <div key={`${keyPrefix}-stanza-${i}`} className="whitespace-pre-line">
             {renderInline(stanza, `${keyPrefix}-stanza-${i}`)}
           </div>
         ))}
@@ -82,13 +79,7 @@ function renderBody(
   return out;
 }
 
-function SectionBlock({
-  section,
-  lang,
-}: {
-  section: Section;
-  lang: Lang;
-}) {
+function SectionBlock({ section, lang }: { section: Section; lang: Lang }) {
   const enVisibility = lang === "en" ? "block" : "hidden md:block";
   const jaVisibility = lang === "ja" ? "block" : "hidden md:block";
 
@@ -184,7 +175,7 @@ export default function AboutContent() {
             className="text-4xl md:text-6xl"
             style={{ fontFamily: "var(--font-hina-mincho), serif" }}
           >
-            HAKO（はこ）
+            はこ
           </h1>
           <p className="mt-3 text-sm md:text-base text-gray-600">
             24 March – 19 April 2026 · Kotomath Hyogomachi, Takamatsu
