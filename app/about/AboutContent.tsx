@@ -47,23 +47,27 @@ function SectionBlock({
       )}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
         <div lang="en" className={`leading-relaxed ${enVisibility}`}>
-          <h2
-            className="text-2xl md:text-3xl mb-3"
-            style={{ fontFamily: "var(--font-hina-mincho), serif" }}
-          >
-            {section.title_en}
-          </h2>
+          {section.title_en && (
+            <h2
+              className="text-2xl md:text-3xl mb-3"
+              style={{ fontFamily: "var(--font-hina-mincho), serif" }}
+            >
+              {section.title_en}
+            </h2>
+          )}
           <div className="text-base">
             {renderBody(section.english, `${section.id}-en`)}
           </div>
         </div>
         <div lang="ja" className={`leading-relaxed ${jaVisibility}`}>
-          <h2
-            className="text-2xl md:text-3xl mb-3"
-            style={{ fontFamily: "var(--font-hina-mincho), serif" }}
-          >
-            {section.title_ja}
-          </h2>
+          {section.title_ja && (
+            <h2
+              className="text-2xl md:text-3xl mb-3"
+              style={{ fontFamily: "var(--font-hina-mincho), serif" }}
+            >
+              {section.title_ja}
+            </h2>
+          )}
           <div className="text-base">
             {renderBody(section.japanese, `${section.id}-ja`)}
           </div>

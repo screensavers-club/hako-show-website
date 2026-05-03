@@ -112,8 +112,8 @@ export const sections: Section[] = [
   },
   {
     id: 11,
-    title_en: "Closing Reflection",
-    title_ja: "結びの考察",
+    title_en: "",
+    title_ja: "",
     author: null,
     english:
       "Defining, classifying and organising things as a means of comprehension is a survival skill that continues to bemuse humans, evident even in the aforementioned personality test. Such taxonomies can be, however, subjective and limiting especially in living creatures that continue to evolve. Challenging the expectation of streamlining, the participating creatives cross freely between mediums and disciplines. The format of the exhibition itself breaks down the white walls of a gallery space, converting passive observation to engaging discussion via one thing that transcends languages: nourishment.\n\nThe outlines of a quintessential box have been reworked, whether by thinking out of it, about the space within it, or transcending it altogether. Spontaneous strokes link Wu Yanrong's and Chong Wah's compositions. The dinner served by Gravy Baby and Ken is a product of taking things apart and putting them together differently, echoing Chong Wah's re-interpretation of a motorbike. Ironically protected by its human rider, his unlikely armour resonates with Kelly's fragile enclosure of hair, which develops meaning through exposing its contents just as Siah's open \"box\" allows us to encounter technology more intimately.\n\nIn a world where we gradually separate ourselves into boxes, physically with rooms and psychologically with labels, HAKO demonstrates using them to initiate rather than impede imagination, include rather than exclude; thus inviting the audience into a conversation contemplating the form of their own metaphorical boxes.",
